@@ -1,0 +1,50 @@
+﻿@model PowerliftingResult
+
+@{
+    ViewData["Title"] = "Result Details";
+}
+
+<div class="text-left mb-4">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+</div>
+
+<div class="card text-white bg-dark mb-4">
+    <div class="card-body">
+        <h3 class="card-title">@Model.Name</h3>
+        <h5 class="card-subtitle mb-3 text-muted">@Model.Meet?.MeetName</h5>
+
+        <table class="table table-bordered table-hover table-dark">
+            <tbody>
+                <tr class="table-secondary"><th colspan="2" class="text-center text-light bg-dark">Lifter Info</th></tr>
+                <tr><th>Sex</th><td>@Model.Sex</td></tr>
+                <tr><th>Division</th><td>@Model.Division</td></tr>
+                <tr><th>Equipment</th><td>@Model.Equipment</td></tr>
+                <tr><th>Age</th><td>@Model.Age</td></tr>
+                <tr><th>Bodyweight (kg)</th><td>@Model.BodyweightKg</td></tr>
+                <tr><th>Weight Class (kg)</th><td>@Model.WeightClassKg</td></tr>
+
+                <tr class="table-secondary"><th colspan="2" class="text-center text-light bg-dark">Lifting Results</th></tr>
+                <tr><th>Best Squat (kg)</th><td>@Model.BestSquatKg</td></tr>
+                <tr><th>4th Attempt Squat (kg)</th><td>@Model.Squat4Kg</td></tr>
+                <tr><th>Best Bench (kg)</th><td>@Model.BestBenchKg</td></tr>
+                <tr><th>4th Attempt Bench (kg)</th><td>@Model.Bench4Kg</td></tr>
+                <tr><th>Best Deadlift (kg)</th><td>@Model.BestDeadliftKg</td></tr>
+                <tr><th>4th Attempt Deadlift (kg)</th><td>@Model.Deadlift4Kg</td></tr>
+                <tr><th>Total (kg)</th><td>@Model.TotalKg</td></tr>
+                <tr><th>Place</th><td>@Model.Place</td></tr>
+                <tr><th>Wilks</th><td>@Model.Wilks</td></tr>
+
+                @if (Model.Meet != null)
+                {
+                    <tr class="table-secondary"><th colspan="2" class="text-center text-light bg-dark">Meet Info</th></tr>
+                    <tr><th>Meet Name</th><td>@Model.Meet.MeetName</td></tr>
+                    <tr><th>Location</th><td>@Model.Meet.MeetTown</td></tr>
+                    <tr><th>Date</th><td>@Model.Meet.Date?.ToShortDateString()</td></tr>
+                    <tr><th>Federation</th><td>@Model.Meet.Federation</td></tr>
+                }
+            </tbody>
+        </table>
+
+        <button class="btn btn-secondary mt-3" onclick="window.history.back();">Back to Results</button>
+    </div>
+</div>

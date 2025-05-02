@@ -1,0 +1,25 @@
+﻿<table class="table table-dark table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Meet</th>
+            <th>Federation</th>
+            <th>Division</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var result in Model)
+        {
+            <tr>
+                <td>@result.Name</td>
+                <td>@(result.Meet != null ? result.Meet.MeetName : "Meet Not available")</td>
+                <td>@(result.Meet != null ? result.Meet.Federation : "Meet Not available")</td>
+                <td>@result.Division</td>
+                <td>
+                    <a href="@Url.Action("Details", new { id = result.Id })" class="btn btn-info">View</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

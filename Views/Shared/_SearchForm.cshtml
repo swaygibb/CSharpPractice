@@ -1,0 +1,11 @@
+﻿@model string
+
+<form asp-action="Search" method="get" class="mb-4">
+    <div class="input-group">
+        <input type="text" name="searchString" value="@Model" class="form-control" placeholder="Search results..." />
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary">Search</button>
+            <a href="@Url.Action("Index")" class="btn btn-info">Cancel</a>
+        </div>
+    </div>
+</form>
