@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CSharpPractice.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250502151639_AddMeetTable2")]
+    partial class AddMeetTable2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,7 +23,6 @@ namespace CSharpPractice.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
 
             modelBuilder.Entity("Meet", b =>
                 {
@@ -55,9 +57,6 @@ namespace CSharpPractice.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MeetID")
-                        .IsUnique();
 
                     b.ToTable("Meets");
                 });
@@ -98,8 +97,9 @@ namespace CSharpPractice.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MeetID")
-                        .HasColumnType("int");
+                    b.Property<string>("MeetID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -126,26 +126,7 @@ namespace CSharpPractice.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MeetID");
-
                     b.ToTable("PowerliftingResults");
-                });
-
-            modelBuilder.Entity("PowerliftingResult", b =>
-                {
-                    b.HasOne("Meet", "Meet")
-                        .WithMany("Results")
-                        .HasForeignKey("MeetID")
-                        .HasPrincipalKey("MeetID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Meet");
-                });
-
-            modelBuilder.Entity("Meet", b =>
-                {
-                    b.Navigation("Results");
                 });
 #pragma warning restore 612, 618
         }
