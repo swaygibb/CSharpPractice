@@ -21,6 +21,7 @@ namespace CSharpPractice.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+
             modelBuilder.Entity("Meet", b =>
                 {
                     b.Property<int>("Id")
