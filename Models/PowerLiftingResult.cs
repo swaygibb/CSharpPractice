@@ -32,5 +32,6 @@ public class PowerliftingResult
     public decimal? Wilks { get; set; }
 
     public static Func<IQueryable<PowerliftingResult>, IQueryable<PowerliftingResult>> Recent =
-        query => query.OrderByDescending(p => p.Id).Take(20);
+        query => query.OrderByDescending(p => p.Id)
+        .Take(20);
 }

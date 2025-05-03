@@ -1,7 +1,10 @@
-﻿using CSharpPractice.Models;
+﻿using CSharpPractice.Helpers;
+using CSharpPractice.Models;
+using Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace CSharpPractice.Controllers
 {
@@ -16,31 +19,25 @@ namespace CSharpPractice.Controllers
 
         public IActionResult Index()
         {
-            var recentResults = PowerliftingResult
-                .Recent(_context.PowerliftingResults.Include(recentResults => recentResults.Meet))
-                .ToList();
+            var query = PowerliftingResult
+                .Recent(_context.PowerliftingResults.Include(r => r.Meet));
 
-            return View(recentResults);
+            return View(query.ToList());
         }
 
-        public async Task<IActionResult> Search(string searchString)
+
+        public async Task<IActionResult> Search(string searchString, int page = 1, int pageSize = 20)
         {
             ViewData["CurrentFilter"] = searchString;
 
             var results = _context.PowerliftingResults.Include(r => r.Meet).AsQueryable();
+            results = SearchHelper.SearchQuery(results, searchString);
+            var pagingData = PagingHelper.SetPowerliftingPaging(results, page, pageSize);
 
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                results = results.Where(r =>
-                    r.Name.Contains(searchString) ||
-                    (r.Division != null && r.Division.Contains(searchString)) ||
-                    (r.Meet != null && !string.IsNullOrEmpty(r.Meet.MeetName) && r.Meet.MeetName.Contains(searchString)) || 
-                    (r.Meet != null && !string.IsNullOrEmpty(r.Meet.Federation) && r.Meet.Federation.Contains(searchString)))
-                    .Take(20);
-            }
+            ViewData["CurrentPage"] = pagingData.Page;
+            ViewData["TotalPages"] = pagingData.TotalPages;
 
-
-            return View(await results.ToListAsync());
+            return View(await pagingData.Results.ToListAsync());
         }
 
         public IActionResult Details(int Id)
