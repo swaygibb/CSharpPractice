@@ -4,7 +4,7 @@ namespace Helpers
 {
     public static class PagingHelper
     {
-        public static PagingData SetPowerliftingPaging(IQueryable<PowerliftingResult> result, int page, int pageSize)
+        public static (int page, int totalPages, IQueryable<PowerliftingResult> pagedResults) SetPowerliftingPaging(IQueryable<PowerliftingResult> result, int page, int pageSize)
         {
             var totalItems = result.Count();
             var totalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
@@ -13,7 +13,7 @@ namespace Helpers
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize);
 
-            return new PagingData(page, totalPages, pagedResults);
+            return (page, totalPages, pagedResults);
         }
     }
 }
