@@ -32,12 +32,12 @@ namespace CSharpPractice.Controllers
 
             var results = _context.PowerliftingResults.Include(r => r.Meet).AsQueryable();
             results = SearchHelper.SearchQuery(results, searchString);
-            var pagingData = PagingHelper.SetPowerliftingPaging(results, page, pageSize);
+            var (currentPage, totalPages, resultRecords) = PagingHelper.SetPowerliftingPaging(results, page, pageSize);
 
-            ViewData["CurrentPage"] = pagingData.Page;
-            ViewData["TotalPages"] = pagingData.TotalPages;
+            ViewData["CurrentPage"] = currentPage;
+            ViewData["TotalPages"] = totalPages;
 
-            return View(await pagingData.Results.ToListAsync());
+            return View(await resultRecords.ToListAsync());
         }
 
         public IActionResult Details(int Id)
