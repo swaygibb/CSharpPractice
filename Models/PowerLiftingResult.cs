@@ -31,6 +31,17 @@ public class PowerliftingResult
     public int? Place { get; set; }
     public decimal? Wilks { get; set; }
 
+    [NotMapped]
+    public string LifterRating => Wilks switch
+    {
+        null => "Unrated",
+        < 200 => "Beginner",
+        >= 200 and < 300 => "Novice",
+        >= 300 and < 400 => "Intermediate",
+        >= 400 and < 500 => "Advanced",
+        >= 500 => "Elite"
+    };
+
     public static Func<IQueryable<PowerliftingResult>, IQueryable<PowerliftingResult>> Recent =
         query => query.OrderByDescending(p => p.Id)
         .Take(20);

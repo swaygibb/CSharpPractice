@@ -5,6 +5,7 @@
             <th>Meet</th>
             <th>Federation</th>
             <th>Division</th>
+            <th>Lifter Rating</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -16,6 +17,7 @@
                 <td>@(result.Meet != null ? result.Meet.MeetName : "Meet Not available")</td>
                 <td>@(result.Meet != null ? result.Meet.Federation : "Meet Not available")</td>
                 <td>@result.Division</td>
+                <td>@result.LifterRating</td>
                 <td>
                     <a href="@Url.Action("Details", new { id = result.Id })" class="btn btn-info">View</a>
                 </td>
