@@ -24,6 +24,10 @@
                 <tr><th>Weight Class (kg)</th><td>@Model.WeightClassKg</td></tr>
                 <tr><th>Lifter Rating</th><td>@Model.LifterRating</td></tr>
                 <tr><th>Commentary</th><td>@Model.Commentary</td></tr>
+                @if (Model.IsNotable)
+                {
+                    <tr><th>Notable</th><td>This is a notable lifter.</td></tr>
+                }
 
                 <tr class="table-secondary"><th colspan="2" class="text-center text-light bg-dark">Lifting Results</th></tr>
                 <tr><th>Best Squat (kg)</th><td>@Model.BestSquatKg</td></tr>
