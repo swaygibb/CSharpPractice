@@ -67,6 +67,13 @@ public class PowerliftingResult
         _ => $"{Name} gave a solid effort on the platform."
     };
 
+    [NotMapped]
+    public bool IsNotable => NotableNamesSet.Contains(Name);
+
+    private static readonly HashSet<string> NotableNamesSet = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "Shane Hammock", "Jeff Bumanglag", "Jake Anderson", "Justin Zottl"
+    };
 
     public static Func<IQueryable<PowerliftingResult>, IQueryable<PowerliftingResult>> Recent =
         query => query.OrderByDescending(p => p.Id)
