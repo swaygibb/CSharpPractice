@@ -1,6 +1,6 @@
 ﻿using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
-namespace Helpers
+namespace CSharpPractice.Helpers
 {
     public static class PagingHelper
     {
