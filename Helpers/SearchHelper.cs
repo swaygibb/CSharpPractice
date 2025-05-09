@@ -1,4 +1,6 @@
-﻿namespace CSharpPractice.Helpers
+﻿using CSharpPractice.Models;
+
+namespace CSharpPractice.Helpers
 {
     public class SearchHelper
     {
