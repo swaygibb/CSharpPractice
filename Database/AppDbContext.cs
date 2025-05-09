@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CSharpPractice.Models;
+using Microsoft.EntityFrameworkCore;
 
 public class AppDbContext : DbContext
 {

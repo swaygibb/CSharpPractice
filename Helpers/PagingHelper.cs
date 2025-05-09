@@ -1,4 +1,5 @@
-﻿using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+﻿using CSharpPractice.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace CSharpPractice.Helpers
 {
