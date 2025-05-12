@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Result Details";
 }
+@using CSharpPractice.Extensions
 
 <div class="text-left mb-4">
     <h1 class="display-4">@ViewData["Title"]</h1>
@@ -10,7 +11,7 @@
 
 <div class="card text-white bg-dark mb-4">
     <div class="card-body">
-        <h3 class="card-title">@Model.Name</h3>
+        <h3 class="card-title">@Model.Name (@(((string)Model.Name).ToSlug()))</h3>
         <h5 class="card-subtitle mb-3 text-muted">@Model.Meet?.MeetName</h5>
 
         <table class="table table-bordered table-hover table-dark">
@@ -45,7 +46,7 @@
                     <tr class="table-secondary"><th colspan="2" class="text-center text-light bg-dark">Meet Info</th></tr>
                     <tr><th>Meet Name</th><td>@Model.Meet.MeetName</td></tr>
                     <tr><th>Location</th><td>@Model.Meet.MeetTown</td></tr>
-                    <tr><th>Date</th><td>@Model.Meet.Date?.ToShortDateString()</td></tr>
+                    <tr><th>Date</th><td>@Model.Meet.Date.FormatDate()</td></tr>
                     <tr><th>Federation</th><td>@Model.Meet.Federation</td></tr>
                 }
             </tbody>
