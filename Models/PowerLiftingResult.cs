@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CSharpPractice.Models
 {
-    public class PowerliftingResult
+    public class PowerliftingResult: IEntity
     {
         public int Id { get; set; }
 
@@ -74,9 +74,9 @@ namespace CSharpPractice.Models
         public bool IsNotable => NotableNamesSet.Contains(Name);
 
         private static readonly HashSet<string> NotableNamesSet = new(StringComparer.OrdinalIgnoreCase)
-    {
-        "Shane Hammock", "Jeff Bumanglag", "Jake Anderson", "Justin Zottl"
-    };
+        {
+            "Shane Hammock", "Jeff Bumanglag", "Jake Anderson", "Justin Zottl"
+        };
 
         public static Func<IQueryable<PowerliftingResult>, IQueryable<PowerliftingResult>> Recent =
             query => query.OrderByDescending(p => p.Id)
