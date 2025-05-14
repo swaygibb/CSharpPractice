@@ -3,7 +3,7 @@ using CSharpPractice.Models;
 
 namespace CSharpPractice.Models
 {
-    public class Meet
+    public class Meet : IEntity
     {
         public int Id { get; set; }
         public required int MeetID { get; set; }
